@@ -1,0 +1,22 @@
+# Data (DO NOT PUSH)
+*.csv
+*.xlsx
+*.json
+
+# Models
+*.pkl
+
+# MLflow
+mlruns/
+
+# Python cache
+_pycache_/
+*.pyc
+
+# Virtual env
+venv/
+.env
+
+# System files
+.DS_Store
+Thumbs.db
