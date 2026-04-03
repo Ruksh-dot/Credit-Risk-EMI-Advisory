@@ -5,24 +5,28 @@ import os
 import urllib.request
 import pickle
 import gdown
-import os
-import gdown
-import pickle
+
+
 
 # =========================
 # DOWNLOAD FUNCTION
 # =========================
 def download_file(file_id, output):
-    # Remove corrupted/incomplete file
+    import os
+    import gdown
+
+    # Always delete old file (important)
     if os.path.exists(output):
-        if os.path.getsize(output) < 1000000:  # <1MB = corrupted
-            os.remove(output)
+        os.remove(output)
 
-    # Download if not present
-    if not os.path.exists(output):
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output, quiet=False)
+    # Strong download URL (works better)
+    url = f"https://drive.google.com/uc?id={file_id}"
 
+    # Download file
+    gdown.download(url, output, quiet=False, fuzzy=True)
+
+    # Debug: check file size
+    print(f"{output} size:", os.path.getsize(output))
 
 # =========================
 # DOWNLOAD ALL FILES
