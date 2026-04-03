@@ -35,10 +35,7 @@ def download_file(file_id, output):
 # =========================
 download_file("16EnlON24jRyOq4OreRxrA6RDIbt-CEaO", "model_reg.pkl")
 download_file("13VUiQyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
-download_file("1j9s1GXzL8U7-4D6dN5NU65t98p48ew-A", "columns_reg.pkl")
-download_file("1ZVepl5Csq932MJNaWNDpQGlj3gmea4tX", "columns_clf.pkl")
-download_file("1gwC2LKLDNCfgneCL51zwkCqRqmKZdbd7", "scaler_clf.pkl")
-download_file("1iTMdQuV_2BzL0LTq88d21JaHhOCuityO", "label_encoder.pkl")
+
 
 
 
