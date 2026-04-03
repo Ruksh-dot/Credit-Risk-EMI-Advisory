@@ -3,9 +3,6 @@
 *.xlsx
 *.json
 
-# Models
-*.pkl
-
 # MLflow
 mlruns/
 
