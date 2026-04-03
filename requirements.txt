@@ -6,3 +6,5 @@ xgboost
 imbalanced-learn
 mlflow
 gdown
+requests
+joblib
