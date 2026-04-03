@@ -17,17 +17,19 @@ import requests
 
 def download_file(file_id, output):
     import os
+    import gdown
 
+    # Always delete old file
     if os.path.exists(output):
         os.remove(output)
 
+    # Correct direct download URL
     url = f"https://drive.google.com/uc?export=download&id={file_id}"
 
-    response = requests.get(url)
+    # Download
+    gdown.download(url, output, quiet=False, use_cookies=False)
 
-    with open(output, "wb") as f:
-        f.write(response.content)
-
+    # Debug
     print(f"{output} size:", os.path.getsize(output))
 
 # =========================
