@@ -21,7 +21,7 @@ def download_file(file_id, output):
     # Download if not present
     if not os.path.exists(output):
         url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output, quiet=False, fuzzy=True)
+        gdown.download(url, output, quiet=False)
 
 
 # =========================
