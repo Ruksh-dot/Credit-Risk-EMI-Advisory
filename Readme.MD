@@ -44,6 +44,7 @@ A Machine Learning-powered web application that predicts:
   - MLflow  
   - Streamlit 
 
+
 ## 🧪 Model Selection & Experiment Tracking
 
 Multiple models were trained and evaluated using MLflow to select the best-performing ones.
@@ -61,19 +62,18 @@ Classification:
 - Random Forest Classifier
 - XGBoost Classifier
 
----
 
 ### 📊 Final Model Selection
 
 Regression Model (EMI Prediction):
-  - Selected Model: Random Forest (Tuned)
-  - R² Score: ~0.979  
-  - RMSE: ~1100  
+   - Selected Model: Random Forest (Tuned)
+   - R² Score: ~0.97  
+   - RMSE: ~1300  
 
 Why chosen:
-  - Best balance between bias & variance  
-  - Lower RMSE than other models  
-  - Stable performance on unseen data  
+   - Best balance between bias & variance  
+   - Lower RMSE than other models  
+   - Stable performance on unseen data 
 
 ---
 
@@ -97,8 +97,8 @@ MLflow was used to:
   - Log metrics and parameters  
   - Save trained models  
 
-
 👉 Attached the tracking link here:  http://127.0.0.1:5000/#/experiments/885067963678930537?viewStateShareKey=ed7515db6761d944feb97e6905108cca4df71d7b4cfd544b7b9dc7649b9e30a5&compareRunsMode=TABLE
+
 
 ## 📂 Dataset
 
@@ -106,18 +106,46 @@ Due to size constraints, the dataset is hosted on Google Drive:
 
 👉  Dataset:  https://drive.google.com/drive/folders/1EHSvWNWdn7RlPqvCmun2C9aaR07O4ACK?usp=drive_link
 
-## 📂 Project Structure
 
-Emi-Pro/
-│── app.py
-│── README.md
-│── .gitignore
-│
-├── notebooks/
-│   └── emi_prediction.ipynb
-│
-├── assets/
-│   └── mlflow path
+## 🌐 Deployment
+
+The application is deployed using *Streamlit Cloud*.
+
+ 🔹 Live App
+
+👉 https://credit-risk-emi-advisory-shqb34xxdys8ir4cklutbp.streamlit.app/
+
+  🔹 Deployment Architecture
+
+  - Trained models are optimized (reduced size) and stored directly in the GitHub repository
+  - Models are loaded locally within the app using pickle
+  - No external storage (like Google Drive) is required
+  - Ensures faster, more reliable deployment
+
+
+ 🔹 Key Deployment Challenges Solved
+
+   - ❌ Corrupted model downloads  
+   - ❌ Google Drive access permission issues  
+   - ❌ Pickle loading errors (invalid load key)  
+   - ❌ Feature mismatch between training & inference
+
+
+
+## 📁 Project Structure
+
+Credit-Risk-EMI-Advisory/
+├── app.py
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── Emi_prediction.ipynb
+├── model_reg.pkl
+├── model_clf.pkl
+├── columns_reg.pkl
+├── columns_clf.pkl
+├── scaler_clf.pkl
+└── label_encoder.pkl
 
 
 
@@ -126,12 +154,16 @@ Emi-Pro/
   - Feature mismatch between training & Streamlit  
   - Data leakage issues  
   - Feature engineering consistency  
-  - Column alignment after encoding  
+  - Column alignment after encoding 
+  - Model file size — resolved using joblib compression
+  - Class imbalance — handled using SMOTE 
 
 
 ## 💡 Learnings
 
-  - Training and inference pipelines must match exactly  
-  - Debugging ML systems is harder than building them  
-  - Feature engineering matters more than model choice  
-  - MLflow helps in structured experimentation  
+ - Training and inference pipelines must match exactly  
+ - Feature engineering impacts performance more than model choice  
+ - Debugging ML systems involves data, preprocessing, and deployment issues  
+ - Model size optimization is important for smooth deployment  
+ - Simpler architecture improves reliability and reduces errors  
+ - Deployment introduces real-world constraints beyond model building
