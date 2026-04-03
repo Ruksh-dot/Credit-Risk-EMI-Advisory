@@ -3,6 +3,10 @@
 *.xlsx
 *.json
 
+# pickle files
+*.pkl
+
+
 # MLflow
 mlruns/
 
