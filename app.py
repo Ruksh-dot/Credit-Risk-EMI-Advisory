@@ -5,24 +5,28 @@ import os
 import urllib.request
 import pickle
 import gdown
+import requests
 
 
 
 # =========================
 # DOWNLOAD FUNCTION
 # =========================
+
+
+
 def download_file(file_id, output):
     import os
-    import gdown
 
-    # Delete old file
     if os.path.exists(output):
         os.remove(output)
 
-    # Direct download (bypass Google restrictions)
-    url = f"https://drive.usercontent.google.com/download?id={file_id}&export=download"
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
 
-    gdown.download(url, output, quiet=False)
+    response = requests.get(url)
+
+    with open(output, "wb") as f:
+        f.write(response.content)
 
     print(f"{output} size:", os.path.getsize(output))
 
