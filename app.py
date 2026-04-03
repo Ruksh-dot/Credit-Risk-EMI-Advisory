@@ -10,37 +10,16 @@ import requests
 
 
 def download_file(file_id, output):
-    import requests
+    if not os.path.exists(output) or os.path.getsize(output) < 100000:
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, output, quiet=False, fuzzy=True)
 
-    URL = "https://drive.google.com/uc?export=download"
-
-    session = requests.Session()
-
-    response = session.get(URL, params={'id': file_id}, stream=True)
-
-    # Handle Google Drive warning for large files
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            params = {'id': file_id, 'confirm': value}
-            response = session.get(URL, params=params, stream=True)
-            break
-
-    with open(output, "wb") as f:
-        for chunk in response.iter_content(32768):
-            if chunk:
-                f.write(chunk)
-
-    import os
-    print(f"{output} size:", os.path.getsize(output))
-
-
-# =========================
-# DOWNLOAD ALL FILES
-# =========================
 download_file("16EnlON24jRyOq4OreRxrA6RDIbt-CEa0", "model_reg.pkl")
 download_file("13VUiqyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
-
-
+download_file("1j9s1GXzL8U7-4D6dN5NU65t98p48ew-A", "columns_reg.pkl")
+download_file("12Vep15Csq932MJNaWNDpQGlj3gmea4tX", "columns_clf.pkl")
+download_file("1gWC2LKLDNCfgneCL51zwkCqRqmKZdbd7", "scaler_clf.pkl")
+download_file("1iTMdQuV_2BzL0LTq88d213aHhOCuityO", "label_encoder.pkl")
 
 
 # =========================
