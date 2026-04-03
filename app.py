@@ -1,12 +1,52 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
+import urllib.request
 import pickle
 
-# ================================
-# LOAD FILES
-# ================================
+# ===============================
+# DOWNLOAD FUNCTION
+# ===============================
+def download_file(file_id, filename):
+    if not os.path.exists(filename):
+        url = f"https://drive.google.com/uc?export=download&id={file_id}"
+        print(f"Downloading {filename}...")
+        urllib.request.urlretrieve(url, filename)
+
+# ===============================
+# DOWNLOAD ALL FILES
+# ===============================
+download_file("1TieA4CbysErDrv1C5pizz7wf0gFQguFt", "model_reg.pkl")
+download_file("13VUiQyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
+download_file("1j9s1GXzL8U7-4D6dN5NU65t98p48ew-A", "columns_reg.pkl")
+download_file("1ZVepl5Csq932MJNaWNDpQGlj3gmea4tX", "columns_clf.pkl")
+download_file("1gwC2LKLDNCfgneCL51zwkCqRqmKZdbd7", "scaler_clf.pkl")
+download_file("1iTMdQuV_2BzL0LTq88d21JaHhOCuityO", "label_encoder.pkl")
+
+# ===============================
+# LOAD MODELS
+# ===============================
 model_reg = pickle.load(open("model_reg.pkl", "rb"))
+model_clf = pickle.load(open("model_clf.pkl", "rb"))
+
+columns_reg = pickle.load(open("columns_reg.pkl", "rb"))
+columns_clf = pickle.load(open("columns_clf.pkl", "rb"))
+
+scaler_clf = pickle.load(open("scaler_clf.pkl", "rb"))
+label_encoder = pickle.load(open("label_encoder.pkl", "rb"))
+
+
+if not os.path.exists("model_reg.pkl"):
+    url = "https://drive.google.com/uc?export=download&id=1TieA4CbysErDrv1C5pizz7wf0gFQguFt"
+    urllib.request.urlretrieve(url, "model_reg.pkl")
+
+
+
+"""model_reg = pickle.load(open("model_reg.pkl", "rb"))
+
+
+
 model_clf = pickle.load(open("model_clf.pkl", "rb"))
 
 
@@ -15,7 +55,7 @@ scaler_clf = pickle.load(open("scaler_clf.pkl", "rb"))  # classification scaler
 columns_reg = pickle.load(open("columns_reg.pkl", "rb"))
 columns_clf = pickle.load(open("columns_clf.pkl", "rb"))
 
-label_encoder = pickle.load(open("label_encoder.pkl", "rb"))
+label_encoder = pickle.load(open("label_encoder.pkl", "rb"))"""
 
 # ================================
 # TITLE
