@@ -9,39 +9,24 @@ import requests
 
 
 
-# =========================
-# DOWNLOAD FUNCTION
-# =========================
-
-
-
 def download_file(file_id, output):
-    import os
-    import gdown
-
-    # Always delete old file
-    if os.path.exists(output):
-        os.remove(output)
-
-    # Correct direct download URL
-    url = f"https://drive.google.com/uc?export=download&id={file_id}"
-
-    # Download
-    gdown.download(url, output, quiet=False, use_cookies=False)
-
-    # Debug
-    print(f"{output} size:", os.path.getsize(output))
-
-
-def download_direct(file_id, output):
     import requests
 
-    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    URL = "https://drive.google.com/uc?export=download"
 
-    response = requests.get(url, stream=True)
+    session = requests.Session()
+
+    response = session.get(URL, params={'id': file_id}, stream=True)
+
+    # Handle Google Drive warning for large files
+    for key, value in response.cookies.items():
+        if key.startswith('download_warning'):
+            params = {'id': file_id, 'confirm': value}
+            response = session.get(URL, params=params, stream=True)
+            break
 
     with open(output, "wb") as f:
-        for chunk in response.iter_content(1024):
+        for chunk in response.iter_content(32768):
             if chunk:
                 f.write(chunk)
 
@@ -52,8 +37,8 @@ def download_direct(file_id, output):
 # =========================
 # DOWNLOAD ALL FILES
 # =========================
-download_file("16EnlON24jRyOq4OreRxrA6RDIbt-CEaO", "model_reg.pkl")
-download_direct("13VUiqyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
+download_file("16EnlON24jRyOq4OreRxrA6RDIbt-CEa0", "model_reg.pkl")
+download_file("13VUiqyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
 
 
 
