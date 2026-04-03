@@ -10,9 +10,16 @@ import gdown
 # DOWNLOAD FUNCTION
 # =========================
 def download_file(file_id, output):
+    # Remove corrupted/incomplete file
+    if os.path.exists(output):
+        if os.path.getsize(output) < 1000000:  # <1MB = corrupted
+            os.remove(output)
+
+    # Download if not present
     if not os.path.exists(output):
         url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output, quiet=False)
+        gdown.download(url, output, quiet=False, fuzzy=True)
+
 
 # =========================
 # DOWNLOAD ALL FILES
@@ -23,6 +30,7 @@ download_file("1j9s1GXzL8U7-4D6dN5NU65t98p48ew-A", "columns_reg.pkl")
 download_file("1ZVepl5Csq932MJNaWNDpQGlj3gmea4tX", "columns_clf.pkl")
 download_file("1gwC2LKLDNCfgneCL51zwkCqRqmKZdbd7", "scaler_clf.pkl")
 download_file("1iTMdQuV_2BzL0LTq88d21JaHhOCuityO", "label_encoder.pkl")
+
 
 # =========================
 # LOAD MODELS
