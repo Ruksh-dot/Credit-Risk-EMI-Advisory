@@ -1,36 +1,17 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import os
-import urllib.request
 import pickle
-import gdown
-import requests
+import joblib
+import os
 
-
-
-def download_file(file_id, output):
-    if not os.path.exists(output) or os.path.getsize(output) < 100000:
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output, quiet=False, fuzzy=True)
-
-download_file("16EnlON24jRyOq4OreRxrA6RDIbt-CEa0", "model_reg.pkl")
-download_file("13VUiqyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
-download_file("1j9s1GXzL8U7-4D6dN5NU65t98p48ew-A", "columns_reg.pkl")
-download_file("12Vep15Csq932MJNaWNDpQGlj3gmea4tX", "columns_clf.pkl")
-download_file("1gWC2LKLDNCfgneCL51zwkCqRqmKZdbd7", "scaler_clf.pkl")
-download_file("1iTMdQuV_2BzL0LTq88d213aHhOCuityO", "label_encoder.pkl")
-
-
-# =========================
+# ========================
 # LOAD MODELS
-# =========================
-model_reg = pickle.load(open("model_reg.pkl", "rb"))
+# ========================
+model_reg = joblib.load("model_reg.pkl")
 model_clf = pickle.load(open("model_clf.pkl", "rb"))
-
 columns_reg = pickle.load(open("columns_reg.pkl", "rb"))
 columns_clf = pickle.load(open("columns_clf.pkl", "rb"))
-
 scaler_clf = pickle.load(open("scaler_clf.pkl", "rb"))
 label_encoder = pickle.load(open("label_encoder.pkl", "rb"))
 
