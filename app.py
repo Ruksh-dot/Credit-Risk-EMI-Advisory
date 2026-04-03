@@ -36,27 +36,6 @@ columns_clf = pickle.load(open("columns_clf.pkl", "rb"))
 scaler_clf = pickle.load(open("scaler_clf.pkl", "rb"))
 label_encoder = pickle.load(open("label_encoder.pkl", "rb"))
 
-
-if not os.path.exists("model_reg.pkl"):
-    url = "https://drive.google.com/uc?export=download&id=1TieA4CbysErDrv1C5pizz7wf0gFQguFt"
-    urllib.request.urlretrieve(url, "model_reg.pkl")
-
-
-
-"""model_reg = pickle.load(open("model_reg.pkl", "rb"))
-
-
-
-model_clf = pickle.load(open("model_clf.pkl", "rb"))
-
-
-scaler_clf = pickle.load(open("scaler_clf.pkl", "rb"))  # classification scaler
-
-columns_reg = pickle.load(open("columns_reg.pkl", "rb"))
-columns_clf = pickle.load(open("columns_clf.pkl", "rb"))
-
-label_encoder = pickle.load(open("label_encoder.pkl", "rb"))"""
-
 # ================================
 # TITLE
 # ================================
