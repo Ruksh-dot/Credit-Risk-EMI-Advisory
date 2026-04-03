@@ -32,11 +32,28 @@ def download_file(file_id, output):
     # Debug
     print(f"{output} size:", os.path.getsize(output))
 
+
+def download_direct(file_id, output):
+    import requests
+
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+    response = requests.get(url, stream=True)
+
+    with open(output, "wb") as f:
+        for chunk in response.iter_content(1024):
+            if chunk:
+                f.write(chunk)
+
+    import os
+    print(f"{output} size:", os.path.getsize(output))
+
+
 # =========================
 # DOWNLOAD ALL FILES
 # =========================
 download_file("16EnlON24jRyOq4OreRxrA6RDIbt-CEaO", "model_reg.pkl")
-download_file("13VUiQyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
+download_direct("13VUiqyVu9D4z6_GFK9-k9XWXxzH0k-pI", "model_clf.pkl")
 
 
 
