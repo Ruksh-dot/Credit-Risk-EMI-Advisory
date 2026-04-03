@@ -15,17 +15,15 @@ def download_file(file_id, output):
     import os
     import gdown
 
-    # Always delete old file (important)
+    # Delete old file
     if os.path.exists(output):
         os.remove(output)
 
-    # Strong download URL (works better)
-    url = f"https://drive.google.com/uc?id={file_id}"
+    # Direct download (bypass Google restrictions)
+    url = f"https://drive.usercontent.google.com/download?id={file_id}&export=download"
 
-    # Download file
-    gdown.download(url, output, quiet=False, fuzzy=True)
+    gdown.download(url, output, quiet=False)
 
-    # Debug: check file size
     print(f"{output} size:", os.path.getsize(output))
 
 # =========================
